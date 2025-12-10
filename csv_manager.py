@@ -1,8 +1,8 @@
 # Handles interaction with specification .csv files, including loading/saving and interface for CRUD 
 
-import csv
+import csv  # built in python module to handle csv files
 
-CSV_FILE_PATH = 'data/specifications.csv'
+CSV_FILE_PATH = 'spec-handler/data/specifications.csv'
 
 # Load and return specifications csv file
 def load_specs(filepath):
@@ -13,6 +13,10 @@ def load_specs(filepath):
             specs.append(row)
     return specs
 
-def display_specs(data):
+def display_all_specs(data):
     for row in data:
         print(row)
+
+# def display_single_spec(data, search_by, search_input):
+#   if search_by == 1:
+#       for row in data:
