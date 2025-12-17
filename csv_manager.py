@@ -7,7 +7,7 @@ CSV_FILE_PATH = 'data/specifications.csv'
 # Load and return specifications csv file
 def load_specs(filepath):
     specs = []
-    with open(filepath, mode = 'r', newline = '', encoding = 'utf-8') as file:
+    with open(filepath, mode = 'r', newline='', encoding = 'utf-8') as file:
         reader = csv.reader(file)
         for row in reader:
             specs.append(row)
@@ -30,3 +30,11 @@ def display_single_spec(data, search_by, search_input):
                 print(row)
     else:
         print("Specification not found.\n")
+
+def create_new_spec(filepath, fields):
+    specs = load_specs(filepath)
+    with open(filepath, 'w', newline='') as file:
+         writer = csv.writer(file)
+         for row in specs:
+             writer.writerow(row)
+         writer.writerow(fields)

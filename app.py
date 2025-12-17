@@ -1,7 +1,7 @@
 # Core application logic, imports functions to manage flow of program
 
 import sys  # Allows use of sys.ext(), which is preferred over quit() to exit program
-from csv_manager import load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
+from csv_manager import create_new_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
 from menu import show_menu, display_specs_menu, display_single_spec_menu
 
 # Entry point of spec handler app
@@ -53,7 +53,8 @@ def main():
             fields.append(input("implementationStatusTV: "))
             fields.append(input("implementationStatusIOS: "))
             fields.append(input("implementationStatusAndroid: "))
-            print(fields)
+            create_new_spec(CSV_FILE_PATH, fields)
+            csv = load_specs(CSV_FILE_PATH)
         elif choice == '3':
             pass
         elif choice == '4':
