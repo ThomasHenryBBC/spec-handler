@@ -40,7 +40,20 @@ def main():
                 break
 
         elif choice == '2':
-            pass
+            fields = []
+            print("\nThis will add a new specification to the csv file. Please enter data for each field.")
+            fields.append(input("specID: "))
+            fields.append(input("name: "))
+            fields.append(input("version: "))
+            fields.append(input("date finalised: "))
+            fields.append(input("description: "))
+            fields.append(input("screenshot URL: "))
+            fields.append(input("labelsAndValues: "))
+            fields.append(input("implementationStatusWeb: "))
+            fields.append(input("implementationStatusTV: "))
+            fields.append(input("implementationStatusIOS: "))
+            fields.append(input("implementationStatusAndroid: "))
+            print(fields)
         elif choice == '3':
             pass
         elif choice == '4':
