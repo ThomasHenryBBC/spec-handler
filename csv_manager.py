@@ -39,3 +39,20 @@ def create_new_spec(filepath, fields):
          for row in specs:
              writer.writerow(row)
          writer.writerow(fields)
+
+def delete_spec(filepath, delete_by, search_input):
+    input = open(filepath, 'rb')
+    output = open(filepath, 'wb')
+    writer = csv.writer(input)
+    if delete_by == '1': # search by specID and delete
+        for row in csv.reader(input):
+            if search_input != row[0]:
+                writer.writerow(row)
+    elif delete_by == '2': # search by spec name and delete
+        for row in csv.reader(input):
+            if search_input != row[1].lower():
+                writer.writerow(row)
+    else:
+        print("ERROR: Can only search by specID or name\n")
+    input.close()
+    output.close()
