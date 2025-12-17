@@ -1,4 +1,4 @@
-specId,name,version,finalised,description,screenshot,labelsAndValues,implementationStatusWeb,implementationStatusTV,implementationStatusIOS,implementationStatusAndroid
+specId,name,version,dateFinalised,description,screenshotURL,labelsAndValues,implementationStatusWeb,implementationStatusTV,implementationStatusIOS,implementationStatusAndroid
 036453,Live Event Carousel,1.0.0,22/10/2025,Banner on homepage when live event active,iplayer/homepage/live_event_carousel.png,"container: live-event-section, destinationID: episode-id",TRUE,TRUE,FALSE,FALSE
 374912,Hero Section,1.6.0,22/10/2024,Impression or click on hero section,iplayer/programme_page/hero1.png,"container: hero-section, actionName: start-watching, actionName: content-item, actionName: view-all",TRUE,TRUE,FALSE,FALSE
 203777,Hero Section Rotator,1.1.0,21/08/2024,Click or impression on hero section rotator,iplayer/programme_page/hero1.png,"container: hero-section, destinationID: episode-id, position: 1::1",TRUE,TRUE,TRUE,TRUE

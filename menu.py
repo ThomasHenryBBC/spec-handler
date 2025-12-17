@@ -16,6 +16,22 @@ def show_menu():
         else:
             print("\nInvalid choice. Please enter a number 1 to 5.")
 
+def create_spec_menu():
+    fields = []
+    print("\nThis will add a new specification to the csv file. Please enter data for each field.\n")
+    fields.append(input("specID: "))
+    fields.append(input("name: "))
+    fields.append(input("version: "))
+    fields.append(input("date finalised: "))
+    fields.append(input("description: "))
+    fields.append(input("screenshot URL: "))
+    fields.append(input("labelsAndValues: "))
+    fields.append(input("implementationStatusWeb: "))
+    fields.append(input("implementationStatusTV: "))
+    fields.append(input("implementationStatusIOS: "))
+    fields.append(input("implementationStatusAndroid: "))
+    return fields
+
 def display_specs_menu():
     while True:
         print("\n--Display Specifications--\n")

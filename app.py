@@ -2,7 +2,7 @@
 
 import sys  # Allows use of sys.ext(), which is preferred over quit() to exit program
 from csv_manager import create_new_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
-from menu import show_menu, display_specs_menu, display_single_spec_menu
+from menu import show_menu, create_spec_menu, display_specs_menu, display_single_spec_menu
 
 # Entry point of spec handler app
 def main():
@@ -40,19 +40,7 @@ def main():
                 break
 
         elif choice == '2':
-            fields = []
-            print("\nThis will add a new specification to the csv file. Please enter data for each field.")
-            fields.append(input("specID: "))
-            fields.append(input("name: "))
-            fields.append(input("version: "))
-            fields.append(input("date finalised: "))
-            fields.append(input("description: "))
-            fields.append(input("screenshot URL: "))
-            fields.append(input("labelsAndValues: "))
-            fields.append(input("implementationStatusWeb: "))
-            fields.append(input("implementationStatusTV: "))
-            fields.append(input("implementationStatusIOS: "))
-            fields.append(input("implementationStatusAndroid: "))
+            fields = create_spec_menu()
             create_new_spec(CSV_FILE_PATH, fields)
             csv = load_specs(CSV_FILE_PATH)
         elif choice == '3':
