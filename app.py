@@ -21,11 +21,11 @@ def main():
         if choice == '1':
             display_choice = display_specs_menu()
 
-            if display_choice == '1':
+            if display_choice == '1': # display all specs
                 print("\nAll specifications:\n")
                 display_all_specs(csv)
 
-            elif display_choice == '2':
+            elif display_choice == '2': # display single spec
                 display_single_spec_choice = display_single_spec_menu()         
                 if display_single_spec_choice == '1':
                     search_input = input("\nEnter SpecID: ")
@@ -39,15 +39,18 @@ def main():
             else:
                 break
 
-        elif choice == '2':
+        elif choice == '2': # create new spec and append to csv file
             fields = create_spec_menu()
             create_new_spec(CSV_FILE_PATH, fields)
             csv = load_specs(CSV_FILE_PATH)
-        elif choice == '3':
+
+        elif choice == '3': # update a specification
             pass
-        elif choice == '4':
+
+        elif choice == '4': # delete a specification
             pass
-        elif choice == '5':
+
+        elif choice == '5': # quit app
             quit_program()
 
 

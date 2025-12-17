@@ -32,6 +32,19 @@ def create_spec_menu():
     fields.append(input("implementationStatusAndroid: "))
     return fields
 
+def delete_spec_menu():
+    print("\n--Delete Specification--\n")
+    print("1. Delete specification (search by specID)")
+    print("2. Delete specification (search by name)")
+    print("3. Return to main menu")
+
+    delete_choice = input("\nWhat would you like to do?: ").strip()
+
+    if delete_choice in ['1', '2', '3']:
+        return delete_choice
+    else:
+        print("\nInvalid choice. Please enter a number 1 to 3.")
+
 def display_specs_menu():
     while True:
         print("\n--Display Specifications--\n")
