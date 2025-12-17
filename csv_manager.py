@@ -1,12 +1,12 @@
-# Handles interaction with specification .csv files, including loading/saving and interface for CRUD 
+# Handles CRUD interactions with specification .csv file
 
 import csv  # built in python module to handle csv files
 
 CSV_FILE_PATH = 'data/specifications.csv'
 
-# Load and return specifications csv file
 def load_specs(filepath):
     specs = []
+    # open csv file as readable
     with open(filepath, mode = 'r', newline='', encoding = 'utf-8') as file:
         reader = csv.reader(file)
         for row in reader:
@@ -18,21 +18,22 @@ def display_all_specs(data):
         print(row)
 
 def display_single_spec(data, search_by, search_input):
-    if search_by == '1':
+    if search_by == '1': # search by specID
         print(data[0])
         for row in data:
             if search_input == row[0]:
                 print(row)
-    elif search_by == '2':
+    elif search_by == '2': # search by spec name
         print(data[0])
         for row in data:
             if search_input == row[1].lower():
                 print(row)
     else:
-        print("Specification not found.\n")
+        print("ERROR: Can only search by specID or name\n")
 
 def create_new_spec(filepath, fields):
     specs = load_specs(filepath)
+    # open csv file as writeable
     with open(filepath, 'w', newline='') as file:
          writer = csv.writer(file)
          for row in specs:

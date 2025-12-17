@@ -1,4 +1,4 @@
-# Handles the user interface
+# Handles the user interface and user inputs
 
 def show_menu():
     while True:
