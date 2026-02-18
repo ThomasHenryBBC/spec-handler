@@ -1,6 +1,6 @@
 # Handles CRUD interactions with specification .csv file
 
-import csv  # built in python module to handle csv files
+import csv  # python module to handle csv files
 
 CSV_FILE_PATH = 'data/specifications.csv'
 
@@ -41,18 +41,22 @@ def create_new_spec(filepath, fields):
          writer.writerow(fields)
 
 def delete_spec(filepath, delete_by, search_input):
-    input = open(filepath, 'rb')
-    output = open(filepath, 'wb')
-    writer = csv.writer(input)
-    if delete_by == '1': # search by specID and delete
-        for row in csv.reader(input):
-            if search_input != row[0]:
-                writer.writerow(row)
-    elif delete_by == '2': # search by spec name and delete
-        for row in csv.reader(input):
-            if search_input != row[1].lower():
-                writer.writerow(row)
-    else:
-        print("ERROR: Can only search by specID or name\n")
-    input.close()
-    output.close()
+    # Read csv file to memory as list, delete spec
+    specs = []
+    with open(filepath, 'r') as readFile:
+        reader = csv.reader(readFile)
+        for row in reader:
+            specs.append(row)
+            if delete_by == '1': # search by specID and delete
+                if search_input == row[0]:
+                    specs.remove(row)
+            elif delete_by == '2': # search by spec name and delete
+                if search_input == row[1].lower():
+                    specs.remove(row)
+            else:
+                print("ERROR: Can only search by specID or name\n")
+
+    # Write updated spec list to csv
+    with open(filepath, 'w') as writeFile:
+        writer = csv.writer(writeFile)
+        writer.writerows(specs)

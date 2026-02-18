@@ -53,7 +53,7 @@ def main():
 
             if delete_spec_choice == '1':
                 search_input = input("\nEnter SpecID: ")
-                delete_spec(csv, delete_spec_choice, search_input)
+                delete_spec(CSV_FILE_PATH, delete_spec_choice, search_input)
             elif delete_spec_choice == '2':
                 search_input = input("\nEnter name: ").lower()
                 delete_spec(CSV_FILE_PATH, delete_spec_choice, search_input)
