@@ -2,7 +2,7 @@
 
 import sys  # Allows use of sys.ext(), which is preferred over quit() to exit program
 from csv_manager import create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
-from menu import show_menu, create_spec_menu, delete_spec_menu, display_specs_menu, display_single_spec_menu
+from menu import amend_spec_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu
 
 # Entry point of spec handler app
 def main():
@@ -45,7 +45,7 @@ def main():
             csv = load_specs(CSV_FILE_PATH)
 
         elif choice == '3': # amend a specification
-            pass
+            amend_spec_choice = amend_spec_menu()
 
         elif choice == '4': # delete a specification
             delete_spec_choice = delete_spec_menu()

@@ -1,5 +1,19 @@
 # Handles the user interface and user inputs
 
+def amend_spec_menu():
+    while True:
+        print("\nWhich specification would you like to amend:\n")
+        print("1. Search by SpecID")
+        print("2. Search by Name")
+        print("3. Return to main menu")
+
+        amend_spec_choice = input("\nWhat would you like to do?: ")
+
+        if amend_spec_choice in ['1', '2', '3']:
+            return amend_spec_choice
+        else:
+            print("\nInvalid choice. Please enter a number 1 to 3.")
+
 def create_spec_menu():
     fields = []
     print("\nThis will add a new specification to the csv file. Please enter data for each field.\n")
