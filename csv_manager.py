@@ -1,17 +1,8 @@
-# Handles CRUD interactions with specification .csv file
+# Handles CRUD interactions with the loaded specification .csv file
 
 import csv  # python module to handle csv files
 
 CSV_FILE_PATH = 'data/specifications.csv'
-
-def load_specs(filepath):
-    specs = []
-    # open csv file as readable
-    with open(filepath, mode = 'r', newline='', encoding = 'utf-8') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            specs.append(row)
-    return specs
 
 def display_all_specs(data):
     for row in data:
@@ -60,3 +51,12 @@ def delete_spec(filepath, delete_by, search_input):
     with open(filepath, 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(specs)
+
+def load_specs(filepath):
+    specs = []
+    # open csv file as readable
+    with open(filepath, mode = 'r', newline='', encoding = 'utf-8') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            specs.append(row)
+    return specs
