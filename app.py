@@ -17,6 +17,8 @@ def main():
     while True:
         choice = show_menu()
 
+        
+
         # Display specs
         if choice == '1':
             display_choice = display_specs_menu()
@@ -45,8 +47,17 @@ def main():
             csv = load_specs(CSV_FILE_PATH)
 
         elif choice == '3': # amend a specification
-            amend_spec_choice = amend_spec_menu()
+            amend_choice = amend_spec_menu()
+            if amend_choice == '1':
+                search_input = input("\nEnter SpecID: ")
+                
+            elif amend_choice == '2':
+                search_input = input("\nEnter spec name: ").lower()
+                
+            else:
+                break
 
+        # TODO: Add confirmation prompts to prevent accidental deletion
         elif choice == '4': # delete a specification
             delete_spec_choice = delete_spec_menu()
 
@@ -64,7 +75,7 @@ def main():
         elif choice == '5': # quit app
             quit_program()
 
-
+# TODO: Add confirmation prompt
 def quit_program():
     print("\nExiting specification handler. Goodbye!")
     sys.exit(0)
