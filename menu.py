@@ -1,21 +1,5 @@
 # Handles the user interface and user inputs
 
-def show_menu():
-    while True:
-        print("\n--Specification Manager--\n")
-        print("1. Display specifications")
-        print("2. Add a new specification")
-        print("3. Amend a specification")
-        print("4. Delete a specification")
-        print("5. Quit app\n")
-
-        choice = input("\nWhat would you like to do?: ").strip()
-
-        if choice in ['1', '2', '3', '4', '5']:
-            return choice
-        else:
-            print("\nInvalid choice. Please enter a number 1 to 5.")
-
 def create_spec_menu():
     fields = []
     print("\nThis will add a new specification to the csv file. Please enter data for each field.\n")
@@ -45,6 +29,20 @@ def delete_spec_menu():
     else:
         print("\nInvalid choice. Please enter a number 1 to 3.")
 
+def display_single_spec_menu():
+    while True:
+        print("\n--Specification Search--\n")
+        print("1. Search by SpecID")
+        print("2. Search by Name")
+        print("3. Return to main menu")
+
+        display_single_spec_choice = input("\nWhat would you like to do?: ")
+
+        if display_single_spec_choice in ['1', '2', '3']:
+            return display_single_spec_choice
+        else:
+            print("\nInvalid choice. Please enter a number 1 to 3.")
+
 def display_specs_menu():
     while True:
         print("\n--Display Specifications--\n")
@@ -59,16 +57,18 @@ def display_specs_menu():
         else:
             print("\nInvalid choice. Please enter a number 1 to 3.")
 
-def display_single_spec_menu():
+def show_menu():
     while True:
-        print("\n--Specification Search--\n")
-        print("1. Search by SpecID")
-        print("2. Search by Name")
-        print("3. Return to main menu")
+        print("\n--Specification Manager--\n")
+        print("1. Display specifications")
+        print("2. Add a new specification")
+        print("3. Amend a specification")
+        print("4. Delete a specification")
+        print("5. Quit app\n")
 
-        display_single_spec_choice = input("\nWhat would you like to do?: ")
+        choice = input("\nWhat would you like to do?: ").strip()
 
-        if display_single_spec_choice in ['1', '2', '3']:
-            return display_single_spec_choice
+        if choice in ['1', '2', '3', '4', '5']:
+            return choice
         else:
-            print("\nInvalid choice. Please enter a number 1 to 3.")
+            print("\nInvalid choice. Please enter a number 1 to 5.")

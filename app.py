@@ -44,10 +44,9 @@ def main():
             create_new_spec(CSV_FILE_PATH, fields)
             csv = load_specs(CSV_FILE_PATH)
 
-        elif choice == '3': # update a specification
+        elif choice == '3': # amend a specification
             pass
 
-            # TODO: fix: currently deletes whole csv file
         elif choice == '4': # delete a specification
             delete_spec_choice = delete_spec_menu()
 
