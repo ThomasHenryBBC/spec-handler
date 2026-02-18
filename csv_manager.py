@@ -24,7 +24,7 @@ def display_single_spec(data, search_by, search_input):
 
 def create_new_spec(filepath, fields):
     specs = load_specs(filepath)
-    # open csv file as writeable
+    # Open csv file as writeable
     with open(filepath, 'w', newline='') as file:
          writer = csv.writer(file)
          for row in specs:
@@ -54,7 +54,7 @@ def delete_spec(filepath, delete_by, search_input):
 
 def load_specs(filepath):
     specs = []
-    # open csv file as readable
+    # Open csv file as readable
     with open(filepath, mode = 'r', newline='', encoding = 'utf-8') as file:
         reader = csv.reader(file)
         for row in reader:

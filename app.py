@@ -1,6 +1,6 @@
 # Core application logic, imports functions to manage flow of program
 
-import sys  # Allows use of sys.ext(), which is preferred over quit() to exit program
+import sys  # allows use of sys.ext(), which is preferred over quit() to exit program
 from csv_manager import create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
 from menu import amend_spec_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu
 
@@ -26,7 +26,7 @@ def main():
                 display_all_specs(csv)
 
             elif display_choice == '2': # display single spec
-                display_single_spec_choice = display_single_spec_menu()         
+                display_single_spec_choice = display_single_spec_menu() # choice from menu to search by spec_id or by name   
                 if display_single_spec_choice == '1':
                     search_input = input("\nEnter SpecID: ")
                     display_single_spec(csv, display_single_spec_choice, search_input)
