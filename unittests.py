@@ -33,22 +33,110 @@ def test_load_specs(dummy_csv):
     assert len(data) == 3 # Should have 1 header row + 2 data row
     assert data[1][0] == "111111" # The ID should match first column of first spec in dummy fixture
 
-# Test menu functions
+def test_display_all_specs(dummy_csv, capsys):
+    # capsys captures print() output
+    data = load_specs(dummy_csv)
+    display_all_specs(data)
+    
+    captured = capsys.readouterr()
+    assert "Test Spec One" in captured.out
+    assert "Test Spec Two" in captured.out
 
-def test_get_confirmation_yes(monkeypatch):
-    # Use monkeypatch to hijack the input() function to automatically return 'y'
+def test_display_single_spec_found(dummy_csv, capsys):
+    data = load_specs(dummy_csv)
+    # Search by SpecID (1) for "111111"
+    found = display_single_spec(data, '1', "111111")
+    
+    captured = capsys.readouterr()
+    assert found is True
+    assert "Test Spec One" in captured.out
+    assert "Test Spec Two" not in captured.out # Should only print the one searched for
+
+def test_display_single_spec_not_found(dummy_csv):
+    data = load_specs(dummy_csv)
+    # Search by Name (2) for a non-existent name
+    found = display_single_spec(data, '2', "not a spec")
+    assert found is False
+
+def test_create_new_spec(dummy_csv):
+    new_row = ["333333", "Test Spec Three", "3.0.0", "03/03/2025", "Third test", "img3.png", "label3", "TRUE", "TRUE", "TRUE", "TRUE"]
+    create_new_spec(dummy_csv, new_row)
+    
+    # Reload to verify it was saved
+    data = load_specs(dummy_csv)
+    assert len(data) == 4 # Header + 3 rows
+    assert data[-1][1] == "Test Spec Three"
+
+def test_amend_spec(dummy_csv):
+    # Search by ID ('1') for '111111', change field index 1 (name) to 'Amended Name'
+    success = amend_spec(dummy_csv, '1', '111111', 1, "Amended Name")
+    assert success is True
+    
+    data = load_specs(dummy_csv)
+    assert data[1][1] == "Amended Name"
+
+def test_delete_spec(dummy_csv):
+    # Search by ID ('1') for '222222' and delete
+    success = delete_spec(dummy_csv, '1', '222222')
+    assert success is True
+    
+    data = load_specs(dummy_csv)
+    assert len(data) == 2 # Header + remaining row (111111)
+
+
+# Test Menu UI functions
+
+def test_show_menu(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: '1')
+    assert show_menu() == '1'
+
+def test_display_specs_menu(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: '2')
+    assert display_specs_menu() == '2'
+
+def test_display_single_spec_menu(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: '3')
+    assert display_single_spec_menu() == '3'
+
+def test_delete_spec_menu(monkeypatch):
+    monkeypatch.setattr('builtins.input', lambda _: '1')
+    assert delete_spec_menu() == '1'
+
+def test_get_confirmation(monkeypatch):
     monkeypatch.setattr('builtins.input', lambda _: 'y')
-    
-    # Run the function to return True
-    result = get_confirmation("delete this test")
-    assert result is True
+    assert get_confirmation("test") is True
 
-def test_get_confirmation_no(monkeypatch):
-    # Hijack the input() function to automatically return 'n'
-    monkeypatch.setattr('builtins.input', lambda _: 'n')
+def test_amend_spec_menu(monkeypatch):
+    # The user types '1' (Search by ID), then '111111'
+    inputs = iter(['1', '111111'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     
-    result = get_confirmation("delete this test")
-    assert result is False
+    choice, search_val = amend_spec_menu()
+    assert choice == '1'
+    assert search_val == '111111'
+
+def test_amend_field_menu(monkeypatch):
+    # The user types '2' (Name field), then types 'New Valid Name'
+    inputs = iter(['2', 'New Valid Name'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+    
+    field_choice, new_val = amend_field_menu()
+    assert field_choice == '2'
+    assert new_val == 'New Valid Name'
+
+def test_create_spec_menu(monkeypatch):
+    # The test user types all 11 fields correctly
+    inputs = iter([
+        '999999', 'New Spec', '1.0.0', '10/10/2025', 'Desc', 
+        'img.png', 'lbl', 'TRUE', 'FALSE', 'TRUE', 'FALSE'
+    ])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+    
+    fields = create_spec_menu()
+    assert len(fields) == 11
+    assert fields[0] == '999999'
+    assert fields[7] == 'TRUE'
+
 
 # Test app
 
@@ -58,6 +146,7 @@ def test_quit_program_exits(monkeypatch):
     
     with pytest.raises(SystemExit):
         quit_program()
+        
 
 # Test validator functions
 
