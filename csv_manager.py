@@ -77,7 +77,7 @@ def amend_spec(filepath, search_by, search_input, field_index, new_value):
             row[field_index] = new_value
             updated = True
             break
-        elif search_by == '2' and row[1].lower == search_input:
+        elif search_by == '2' and row[1].lower() == search_input:
             row[field_index] = new_value
             updated = True
             break
