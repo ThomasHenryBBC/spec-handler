@@ -2,7 +2,7 @@
 
 def amend_spec_menu():
     while True:
-        print("\nWhich specification would you like to amend: \n")
+        print("\nWhich specification would you like to amend: ")
         print("1. Search by SpecID")
         print("2. Search by Name")
         print("3. Return to main menu")
@@ -120,3 +120,14 @@ def show_menu():
             return choice
         else:
             print("\nInvalid choice. Please enter a number 1 to 5.")
+
+def get_confirmation(action):
+    # Reusable function that asks user for a yes/no confirmation of action
+    while True:
+        choice = input(f"\nAre you sure you want to {action}? (Y/N)").strip().upper()
+        if choice == 'Y':
+            return True
+        elif choice == 'N':
+            return False
+        else:
+            print("Invalid input. Please enter Y or N")

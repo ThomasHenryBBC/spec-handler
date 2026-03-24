@@ -52,7 +52,7 @@ def main():
             if amend_choice == '3':
                 continue
 
-            print("\nSearching for specification...")
+            print("\nSearching for specification...\n")
             record_found = display_single_spec(csv, amend_choice, search_input) # Returns true if search finds valid spec
 
             if record_found:
