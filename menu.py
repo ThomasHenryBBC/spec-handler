@@ -124,7 +124,7 @@ def show_menu():
 def get_confirmation(action):
     # Reusable function that asks user for a yes/no confirmation of action
     while True:
-        choice = input(f"\nAre you sure you want to {action}? (Y/N)").strip().upper()
+        choice = input(f"\nAre you sure you want to {action}? (Y/N): ").strip().upper()
         if choice == 'Y':
             return True
         elif choice == 'N':

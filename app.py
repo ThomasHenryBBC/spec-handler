@@ -104,8 +104,11 @@ def main():
 
 # TODO: Add confirmation prompt
 def quit_program():
-    print("\nExiting specification handler. Goodbye!")
-    sys.exit(0)
+    if get_confirmation("quit the application"):
+        print("\nExiting specification handler. Goodbye!")
+        sys.exit(0)
+    else:
+        print("\nReturning to main menu.")
     
 # Standard 'entry point' check to prevent running when imported elsewhere, e.g. when unit testing
 if __name__ == '__main__':
