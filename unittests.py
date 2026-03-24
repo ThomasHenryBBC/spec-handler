@@ -11,7 +11,6 @@ from validator import validate_field
 # Fixture to avoid repetition of dummy spec csv data
 @pytest.fixture
 def dummy_csv(tmp_path):
-    """Creates a temporary CSV file with 2 dummy records for testing."""
     filepath = tmp_path / "test_specifications.csv"
 
     # Standard header + 2 valid rows
@@ -27,18 +26,12 @@ def dummy_csv(tmp_path):
 
 # Test csv_manager functions
 
-def test_load_specs(tmp_path):
-    # Create temp file path
-    temp_file = tmp_path / "test_data.csv"
+def test_load_specs(dummy_csv):
+    # Test function using the dummy fixture
+    data = load_specs(dummy_csv)
     
-    # Write dummy CSV data
-    temp_file.write_text("specId,name\n123456,Hero Section\n", encoding="utf-8")
-    
-    # Test function using the temporary file
-    data = load_specs(temp_file)
-    
-    assert len(data) == 2 # Should have 1 header row + 1 data row
-    assert data[1][1] == "Hero Section" # The name should match
+    assert len(data) == 3 # Should have 1 header row + 2 data row
+    assert data[1][0] == "111111" # The ID should match first column of first spec in dummy fixture
 
 # Test menu functions
 
