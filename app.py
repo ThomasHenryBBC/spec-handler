@@ -2,7 +2,7 @@
 
 import sys  # allows use of sys.ext(), which is preferred over quit() to exit program
 from csv_manager import amend_spec, create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
-from menu import amend_spec_menu, amend_field_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu
+from menu import amend_spec_menu, amend_field_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu, get_confirmation
 
 # Entry point of spec handler app
 def main():
@@ -75,20 +75,29 @@ def main():
 
 
 
-        # TODO: Add confirmation prompts to prevent accidental deletion
         elif choice == '4': # delete a specification
             delete_spec_choice = delete_spec_menu()
 
             if delete_spec_choice == '1':
                 search_input = input("\nEnter SpecID: ")
-                delete_spec(CSV_FILE_PATH, delete_spec_choice, search_input)
             elif delete_spec_choice == '2':
                 search_input = input("\nEnter name: ").lower()
-                delete_spec(CSV_FILE_PATH, delete_spec_choice, search_input)
             else:
                 break
 
+            # Prompt user for confirmation
+            if get_confirmation(f"Delete the specification '{search_input}'"):
+                success = delete_spec(CSV_FILE_PATH, delete_spec_choice, search_input)
+
+                if success:
+                    print("\nSuccess! Specification deleted.")
+                else:
+                    print(f"\nError. No specification found matching '{search_input}'")
+            else:
+                print("\nDeletion cancelled.")
+
             csv = load_specs(CSV_FILE_PATH)
+
 
         elif choice == '5': # quit app
             quit_program()

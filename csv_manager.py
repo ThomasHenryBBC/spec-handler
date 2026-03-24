@@ -47,9 +47,11 @@ def delete_spec(filepath, delete_by, search_input):
             if delete_by == '1': # search by specID and delete
                 if search_input == row[0]:
                     specs.remove(row)
+                    deleted = True
             elif delete_by == '2': # search by spec name and delete
                 if search_input == row[1].lower():
                     specs.remove(row)
+                    deleted = True
 
     # Write updated spec list to csv
     with open(filepath, 'w') as writeFile:
