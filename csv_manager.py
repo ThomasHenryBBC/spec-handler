@@ -39,6 +39,7 @@ def create_new_spec(filepath, fields):
 def delete_spec(filepath, delete_by, search_input):
     # Read csv file to memory as list, delete spec
     specs = []
+    deleted = False
     with open(filepath, 'r') as readFile:
         reader = csv.reader(readFile)
         for row in reader:
@@ -49,13 +50,13 @@ def delete_spec(filepath, delete_by, search_input):
             elif delete_by == '2': # search by spec name and delete
                 if search_input == row[1].lower():
                     specs.remove(row)
-            else:
-                print("ERROR: Can only search by specID or name\n")
 
     # Write updated spec list to csv
     with open(filepath, 'w') as writeFile:
         writer = csv.writer(writeFile)
         writer.writerows(specs)
+
+    return deleted
 
 def load_specs(filepath):
     specs = []
