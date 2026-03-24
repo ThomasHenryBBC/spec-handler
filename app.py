@@ -2,7 +2,7 @@
 
 import sys  # allows use of sys.ext(), which is preferred over quit() to exit program
 from csv_manager import create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
-from menu import amend_spec_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu
+from menu import amend_spec_menu, amend_field_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu
 
 # Entry point of spec handler app
 def main():
@@ -47,15 +47,19 @@ def main():
             csv = load_specs(CSV_FILE_PATH)
 
         elif choice == '3': # amend a specification
-            amend_choice = amend_spec_menu()
-            if amend_choice == '1':
-                search_input = input("\nEnter SpecID: ")
-                
-            elif amend_choice == '2':
-                search_input = input("\nEnter spec name: ").lower()
-                
-            else:
-                break
+            amend_choice, search_input = amend_spec_menu()
+
+            if amend_choice == '3':
+                continue
+
+            print("\nSearching for specification...")
+            record_found = display_single_spec(csv, amend_choice, search_input) # Returns true if search finds valid spec
+
+            if record_found:
+                field_choice, new_value = amend_field_menu()
+
+                # Convert menu choice to csv column index
+                field_index = int(field_choice) - 1
 
         # TODO: Add confirmation prompts to prevent accidental deletion
         elif choice == '4': # delete a specification
