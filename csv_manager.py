@@ -9,16 +9,19 @@ def display_all_specs(data):
         print(row)
 
 def display_single_spec(data, search_by, search_input):
+    found = False
     if search_by == '1': # search by specID
         print(data[0])
         for row in data:
             if search_input == row[0]:
                 print(row)
+                found = True
     elif search_by == '2': # search by spec name
         print(data[0])
         for row in data:
             if search_input == row[1].lower():
                 print(row)
+                found = True
     else:
         print("ERROR: Can only search by specID or name\n")
 
