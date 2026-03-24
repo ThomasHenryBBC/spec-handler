@@ -1,7 +1,7 @@
 # Core application logic, imports functions to manage flow of program
 
 import sys  # allows use of sys.ext(), which is preferred over quit() to exit program
-from csv_manager import create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
+from csv_manager import amend_spec, create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec, CSV_FILE_PATH
 from menu import amend_spec_menu, amend_field_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu
 
 # Entry point of spec handler app
@@ -60,6 +60,20 @@ def main():
 
                 # Convert menu choice to csv column index
                 field_index = int(field_choice) - 1
+
+                success = amend_spec(CSV_FILE_PATH, amend_choice, search_input, field_index, new_value)
+                if success:
+                    print("\nSuccess! Specification updated successfully.")
+                else:
+                    print("Error. Failed to update Specification.")
+
+                # Reload spec data to memory
+                csv = load_specs(CSV_FILE_PATH)
+            
+            else:
+                print(f"\nError. No specification found matching '{search_input}")
+
+
 
         # TODO: Add confirmation prompts to prevent accidental deletion
         elif choice == '4': # delete a specification
