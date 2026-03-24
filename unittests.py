@@ -8,6 +8,23 @@ from menu import amend_spec_menu, amend_field_menu, create_spec_menu, delete_spe
 from csv_manager import amend_spec, create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec
 from validator import validate_field
 
+# Fixture to avoid repetition of dummy spec csv data
+@pytest.fixture
+def dummy_csv(tmp_path):
+    """Creates a temporary CSV file with 2 dummy records for testing."""
+    filepath = tmp_path / "test_specifications.csv"
+
+    # Standard header + 2 valid rows
+    content = (
+        "specId,name,version,dateFinalised,description,screenshotURL,labelsAndValues,implementationStatusWeb,implementationStatusTV,implementationStatusIOS,implementationStatusAndroid\n"
+        "111111,Test Spec One,1.0.0,01/01/2025,First test,img1.png,label1,TRUE,FALSE,TRUE,FALSE\n"
+        "222222,Test Spec Two,2.0.0,02/02/2025,Second test,img2.png,label2,FALSE,TRUE,FALSE,TRUE\n"
+    )
+    filepath.write_text(content, encoding="utf-8")
+
+    return str(filepath) # Returns the file path as a string for the manager to use
+
+
 # Test csv_manager functions
 
 def test_load_specs(tmp_path):
