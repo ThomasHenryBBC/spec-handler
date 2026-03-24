@@ -24,6 +24,8 @@ def display_single_spec(data, search_by, search_input):
                 found = True
     else:
         print("ERROR: Can only search by specID or name\n")
+    
+    return found
 
 def create_new_spec(filepath, fields):
     specs = load_specs(filepath)
