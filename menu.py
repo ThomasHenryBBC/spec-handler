@@ -1,5 +1,7 @@
 # Handles the user interface and user inputs
 
+from validator import validate_field
+
 def amend_spec_menu():
     while True:
         print("\nWhich specification would you like to amend: ")
@@ -47,21 +49,27 @@ def amend_field_menu():
 
         return field_choice, new_value
 
-# TODO: Add validation for each field within validator.py
 def create_spec_menu():
     fields = []
+    field_names = [
+        "SpecID", "name", "version", "date finalised (DD/MM/YYYY)", "description", "screenshot URL", "labelsAndValues", "implementationStatusWeb (TRUE/FALSE)", "implementationStatusTV (TRUE/FALSE)", "implementationStatusIOS (TRUE/FALSE)", "implementationStatusAndroid (TRUE/FALSE)"
+    ]
+
     print("\nThis will add a new specification to the csv file. Please enter data for each field.\n")
-    fields.append(input("specID: "))
-    fields.append(input("name: "))
-    fields.append(input("version: "))
-    fields.append(input("date finalised: "))
-    fields.append(input("description: "))
-    fields.append(input("screenshot URL: "))
-    fields.append(input("labelsAndValues: "))
-    fields.append(input("implementationStatusWeb: "))
-    fields.append(input("implementationStatusTV: "))
-    fields.append(input("implementationStatusIOS: "))
-    fields.append(input("implementationStatusAndroid: "))
+    
+    # Enumerate gives index and name of field
+    for index, field_name in enumerate(field_names):
+        while True:
+            value = input(f"{field_name}: ").strip
+
+            is_valid, error_msg = validate_field(index, value)
+
+            if is_valid:
+                fields.append(value)
+                break
+            else:
+                print(f" Error. {error_msg}")
+
     return fields
 
 def delete_spec_menu():

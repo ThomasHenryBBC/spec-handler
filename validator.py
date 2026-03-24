@@ -7,7 +7,7 @@ def validate_field(field_index, value):
 
     value = value.strip()
 
-    # Field 0: specID (Must be exactly 6 digits based on your sample data)
+    # Field 0: specID (Must be exactly 6 digits)
     if field_index == 0:
         if len(value) != 6 or not value.isdigit():
             return False, "SpecID must be exactly 6 digits (e.g., 036453)."
@@ -21,7 +21,7 @@ def validate_field(field_index, value):
     elif field_index == 2:
         parts = value.split('.')
         if len(parts) != 3 or not all(p.isdigit() for p in parts):
-            return False, "Version must be in format X.Y.Z (e.g., 1.0.0)."
+            return False, "Version must be in semantic format X.Y.Z (e.g., 1.0.0)."
 
     # Field 3: dateFinalised (Must be DD/MM/YYYY)
     elif field_index == 3:
@@ -36,7 +36,7 @@ def validate_field(field_index, value):
         if not value.lower().endswith('.png') or not value:
             return False, "Screenshot URL must end with '.png'."
 
-    # Fields 7-10: implementation statuses (Must be exactly TRUE or FALSE)
+    # Fields 7-10: implementation statuses (Must be TRUE or FALSE)
     elif field_index in [7, 8, 9, 10]:
         if value.upper() not in ['TRUE', 'FALSE']:
             return False, "Status must be exactly 'TRUE' or 'FALSE'."
