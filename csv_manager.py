@@ -65,3 +65,28 @@ def load_specs(filepath):
         for row in reader:
             specs.append(row)
     return specs
+
+def amend_spec(filepath, search_by, search_input, field_index, new_value):
+    # Finds spec by ID or Name, updates a specific field of that spec, saves to the CSV
+
+    specs = load_specs(filepath)
+    updated = False
+    
+    for row in specs:
+        if search_by == '1' and row[0] == search_input:
+            row[field_index] = new_value
+            updated = True
+            break
+        elif search_by == '2' and row[1].lower == search_input:
+            row[field_index] = new_value
+            updated = True
+            break
+
+    # Only update CSV if a field was changed
+    if updated:
+        with open(filepath, 'w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerows(specs)
+        return True
+    
+    return False
