@@ -8,8 +8,14 @@ def amend_spec_menu():
         print("3. Return to main menu")
 
         amend_choice = input("\nWhat would you like to do?: ").strip()
-        if amend_choice not in ['1', '2', '3']:
+
+        # Exit early if user wants to go back
+        if amend_choice == '3':
+            return '3', None, None
+
+        if amend_choice not in ['1', '2']:
             print("\nInvalid choice. Please enter a number 1 to 3.")
+            continue
 
         print("\n--Fields--\n")
         print("1. specID")
@@ -27,6 +33,12 @@ def amend_spec_menu():
         field_choice = input("\nWhich field would you like to amend: \n")
         if field_choice not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']:
             print("\nInvalid choice. Please enter a number 1 to 11.")
+            continue
+
+        # Ask for new value of amended field
+        new_value = input("\nEnter the new value: ").strip()
+
+        return amend_choice, field_choice, new_value
 
 # TODO: Add validation for each field within validator.py
 def create_spec_menu():
