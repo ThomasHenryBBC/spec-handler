@@ -9,4 +9,4 @@ specId,name,version,dateFinalised,description,screenshotURL,labelsAndValues,impl
 033748,Nav Footer,1.0.0,22/10/2024,Click or impression on navigation panel,news/navigation/footer.png,"container: nav-footer, actionName: panel-click",TRUE,FALSE,TRUE,TRUE
 002637,Homepage Searchbox,1.1.0,21/08/2024,Activity within search bar,news/search/screenshot.png,"container: ip-searchbox-panel, attemptedSearchKey: dynamic",TRUE,FALSE,FALSE,FALSE
 000162,Sign In,1.2.0,01/07/2025,Viewability events on sign in page,iplayer/sign_in/users.png,"container: sign-in-start, actionName: [sign-in-remote, sign-in-bypass]",TRUE,TRUE,FALSE,FALSE
-663738,Test,2.0.0,01/01/2026,Test spec,test.png,none,true,TRUE,TRUE,FALSE
+
