@@ -53,6 +53,9 @@ def amend_field_menu():
             # Ask for new value of amended field
             new_value = input("\nEnter the new value: ").strip()
 
+            if field_index in [7, 8, 9, 10]:
+                value = value.upper()   # Capitalise input for implementation status fields
+
             is_valid, error_msg = validate_field(field_index, new_value) # Check validity and get error message if invalid
 
             if is_valid:
@@ -73,6 +76,9 @@ def create_spec_menu():
     for index, field_name in enumerate(field_names):
         while True:
             value = input(f"{field_name}: ").strip()
+
+            if index in [7, 8, 9, 10]:
+                value = value.upper()   # Capitalise input for implementation status fields
 
             is_valid, error_msg = validate_field(index, value) # Check validity and get error message if invalid
 
