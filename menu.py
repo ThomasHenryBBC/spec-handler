@@ -11,12 +11,19 @@ def amend_spec_menu():
 
         # Exit early if user wants to go back
         if amend_choice == '3':
-            return '3', None, None
-
-        if amend_choice not in ['1', '2']:
+            return '3', None
+        elif amend_choice == '1':
+            search_input = input("\nEnter SpecID of specification to amend: ").strip()
+            return amend_choice, search_input
+        elif amend_choice == '2':
+            search_input = input("\nEnter Name of specification to amend: ").strip().lower()
+            return amend_choice, search_input
+        else:
             print("\nInvalid choice. Please enter a number 1 to 3.")
-            continue
 
+
+def amend_field_menu():
+    while True:    
         print("\n--Fields--\n")
         print("1. specID")
         print("2. name")
@@ -38,7 +45,7 @@ def amend_spec_menu():
         # Ask for new value of amended field
         new_value = input("\nEnter the new value: ").strip()
 
-        return amend_choice, field_choice, new_value
+        return field_choice, new_value
 
 # TODO: Add validation for each field within validator.py
 def create_spec_menu():
