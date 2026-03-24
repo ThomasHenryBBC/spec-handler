@@ -102,7 +102,6 @@ def main():
         elif choice == '5': # quit app
             quit_program()
 
-# TODO: Add confirmation prompt
 def quit_program():
     if get_confirmation("quit the application"):
         print("\nExiting specification handler. Goodbye!")

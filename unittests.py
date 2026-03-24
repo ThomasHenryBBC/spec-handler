@@ -1,10 +1,55 @@
 # Automated unit tests to prove code functionality and add quality assurance
 # To run automated tests ensure pytest is installed with "pip install pytest" and then run "pytest unittests.py" in the terminal
 
-from app import main
+import pytest
+
+from app import main, quit_program
 from menu import amend_spec_menu, amend_field_menu, create_spec_menu, delete_spec_menu, display_single_spec_menu, display_specs_menu, show_menu, get_confirmation
 from csv_manager import amend_spec, create_new_spec, delete_spec, load_specs, display_all_specs, display_single_spec
 from validator import validate_field
+
+# Test csv_manager functions
+
+def test_load_specs(tmp_path):
+    # Create temp file path
+    temp_file = tmp_path / "test_data.csv"
+    
+    # Write dummy CSV data
+    temp_file.write_text("specId,name\n123456,Hero Section\n", encoding="utf-8")
+    
+    # Test function using the temporary file
+    data = load_specs(temp_file)
+    
+    assert len(data) == 2 # Should have 1 header row + 1 data row
+    assert data[1][1] == "Hero Section" # The name should match
+
+# Test menu functions
+
+def test_get_confirmation_yes(monkeypatch):
+    # Use monkeypatch to hijack the input() function to automatically return 'y'
+    monkeypatch.setattr('builtins.input', lambda _: 'y')
+    
+    # Run the function to return True
+    result = get_confirmation("delete this test")
+    assert result is True
+
+def test_get_confirmation_no(monkeypatch):
+    # Hijack the input() function to automatically return 'n'
+    monkeypatch.setattr('builtins.input', lambda _: 'n')
+    
+    result = get_confirmation("delete this test")
+    assert result is False
+
+# Test app
+
+def test_quit_program_exits(monkeypatch):
+    # Mock get_confirmation to return True (simulating quit)
+    monkeypatch.setattr('app.get_confirmation', lambda _: True)
+    
+    with pytest.raises(SystemExit):
+        quit_program()
+
+# Test validator functions
 
 def test_spec_id_validation():
     # Valid 6-digit ID
