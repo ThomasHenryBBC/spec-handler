@@ -25,6 +25,7 @@ def amend_spec_menu():
 
 
 def amend_field_menu():
+    # Displays fields and gets input for new field value from user
     while True:    
         print("\n--Fields--\n")
         print("1. specID")
@@ -39,15 +40,26 @@ def amend_field_menu():
         print("10. implementationStatusIOS")
         print("11. implementationStatusAndroid")
 
-        field_choice = input("\nWhich field would you like to amend: \n")
+        field_choice = input("\nWhich field would you like to amend (1-11): \n")
+
         if field_choice not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']:
             print("\nInvalid choice. Please enter a number 1 to 11.")
             continue
 
-        # Ask for new value of amended field
-        new_value = input("\nEnter the new value: ").strip()
+        field_index = int(field_choice) - 1 # Convert choice to corresponding field index value
 
-        return field_choice, new_value
+        # Loop until user gives valid choice
+        while True:
+            # Ask for new value of amended field
+            new_value = input("\nEnter the new value: ").strip()
+
+            is_valid, error_msg = validate_field(field_index, new_value) # Check validity and get error message if invalid
+
+            if is_valid:
+                return field_choice, new_value
+            else:
+                print(f" Error. {error_msg}")
+
 
 def create_spec_menu():
     fields = []
@@ -60,9 +72,9 @@ def create_spec_menu():
     # Enumerate gives index and name of field
     for index, field_name in enumerate(field_names):
         while True:
-            value = input(f"{field_name}: ").strip
+            value = input(f"{field_name}: ").strip()
 
-            is_valid, error_msg = validate_field(index, value)
+            is_valid, error_msg = validate_field(index, value) # Check validity and get error message if invalid
 
             if is_valid:
                 fields.append(value)
